@@ -10,3 +10,11 @@ Thumbs.db
 # Env
 .env
 .env.local
+
+# Dependencies
+node_modules/
+
+# WXT build outputs
+dist/
+.wxt/
+.output/
