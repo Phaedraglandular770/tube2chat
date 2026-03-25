@@ -14,3 +14,9 @@ Tube2Chat
 
 Read `.specify/memory/constitution.md` before any architectural decision. It is auto-loaded at session start.
 
+
+## Active Technologies
+- TypeScript 5.x (strict mode) + WXT (latest), Vitest (latest), `wxt/testing` (built-in) (001-extension-scaffold)
+
+## Recent Changes
+- 001-extension-scaffold: Added TypeScript 5.x (strict mode) + WXT (latest), Vitest (latest), `wxt/testing` (built-in)
