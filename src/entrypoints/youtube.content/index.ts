@@ -3,10 +3,10 @@ import { buildGeminiUrl } from "../../utils/prompt";
 
 const BUTTON_ID = "tube2chat-btn";
 const ANCHOR_SELECTORS = [
-  "ytd-watch-metadata #above-the-fold",
-  "#above-the-fold",
-  "#top-row.ytd-watch-metadata",
-  "#primary.ytd-watch-flexy",
+  "#above-the-fold #flexible-item-buttons",
+  "#top-row #flexible-item-buttons",
+  "#flexible-item-buttons",
+  "ytd-video-owner-renderer",
 ];
 
 let pendingObserver: MutationObserver | null = null;
@@ -63,16 +63,17 @@ function injectStyles(): void {
   style.id = STYLES_ID;
   style.textContent = `
     #tube2chat-btn {
-      display: inline-flex;
-      align-items: center;
+      display: inline-flex !important;
+      align-items: center !important;
+      width: fit-content !important;
       gap: 8px;
-      margin: 12px 0 4px;
-      padding: 10px 22px;
+      margin: 0 0 0 12px;
+      padding: 8px 16px;
       border: none;
       border-radius: 24px;
       background: linear-gradient(135deg, #4285f4 0%, #7c3aed 35%, #db2777 70%, #f59e0b 100%);
       background-size: 300% 300%;
-      color: #fff;
+      color: #fff !important;
       font-family: 'Google Sans', 'Segoe UI', system-ui, sans-serif;
       font-size: 14px;
       font-weight: 500;
@@ -84,6 +85,8 @@ function injectStyles(): void {
       white-space: nowrap;
       outline: none;
       -webkit-font-smoothing: antialiased;
+      position: relative;
+      z-index: 1;
     }
     @keyframes tube2chat-shimmer {
       0%   { background-position: 0%   50%; }
@@ -136,7 +139,8 @@ function doInject(anchor: Element): void {
   btn.addEventListener("click", () => {
     window.open(buildGeminiUrl(window.location.href), "_blank");
   });
-  anchor.insertAdjacentElement("afterend", btn);
+
+  anchor.insertAdjacentElement("beforebegin", btn);
 }
 
 export default defineContentScript({
