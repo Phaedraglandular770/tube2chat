@@ -29,14 +29,15 @@ When the user clicks the button, the extension reads the current video URL and o
 
 **Why this priority**: Core value delivery — this is the primary action the tool performs.
 
-**Independent Test**: Click the button on any YouTube video → new tab opens on Gemini with the prompt visible and pre-filled.
+**Independent Test**: Click the button on any YouTube video → new tab opens on Gemini with the prompt pre-filled and auto-submitted.
 
 **Acceptance Scenarios**:
 
 1. **Given** the user clicks the button, **When** the click is processed, **Then** a new browser tab opens pointing to `gemini.google.com`.
 2. **Given** the user clicks the button, **When** the new tab opens, **Then** the prompt contains the YouTube video URL.
 3. **Given** the user clicks the button, **When** the new tab opens, **Then** the prompt requests: an introduction, key points with timestamps, and a conclusion, in French.
-4. **Given** the user navigates from one video to another, **When** they click the button on the second video, **Then** the prompt contains the second video's URL (not the first).
+4. **Given** the user clicks the button, **When** the Gemini tab loads, **Then** the prompt is automatically submitted — the user sees the summary generating immediately without manual action.
+5. **Given** the user navigates from one video to another, **When** they click the button on the second video, **Then** the prompt contains the second video's URL (not the first).
 
 ---
 
@@ -54,7 +55,7 @@ When the user clicks the button, the extension reads the current video URL and o
 - **FR-002**: The button MUST only appear on pages whose URL matches `*://*.youtube.com/watch?v=*`.
 - **FR-003**: The button injection MUST be idempotent — repeated script executions MUST NOT create duplicate buttons.
 - **FR-004**: On button click, the extension MUST read the current page URL (`window.location.href`).
-- **FR-005**: On button click, the extension MUST open `gemini.google.com` in a new tab with a pre-filled prompt.
+- **FR-005**: On button click, the extension MUST open `gemini.google.com` in a new tab with a pre-filled prompt that is automatically submitted — the user should see Gemini start generating the summary immediately.
 - **FR-006**: The prompt MUST include the YouTube video URL so Gemini can retrieve the transcript.
 - **FR-007**: The prompt MUST request a structured summary in French: introduction, key points with timestamps, conclusion.
 - **FR-008**: The extension MUST NOT scrape or parse any YouTube DOM content beyond reading `window.location.href`.

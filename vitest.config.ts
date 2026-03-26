@@ -3,7 +3,4 @@ import { WxtVitest } from "wxt/testing";
 
 export default defineConfig({
   plugins: [WxtVitest()],
-  test: {
-    passWithNoTests: true,
-  },
 });

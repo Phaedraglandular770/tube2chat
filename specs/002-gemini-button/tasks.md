@@ -112,7 +112,7 @@ and testing of each story.
   - Read `new URLSearchParams(location.search).get('prompt')` — if absent or empty, return early (no-op)
   - Wait for Gemini's input element to appear (try `rich-textarea div[contenteditable]` as primary, `textarea` as fallback — use `MutationObserver` to wait)
   - Inject prompt text via native `InputEvent`: set `element.value = promptText` then `element.dispatchEvent(new InputEvent('input', { bubbles: true, data: promptText }))`
-  - MUST NOT auto-submit (no Enter key simulation)
+  - MUST auto-submit: wait for the Send button to become enabled, then click it — user sees summary generating immediately
 - [x] T017 Wire click handler in `src/entrypoints/youtube.content/index.ts`: replace `console.log` stub with `window.open(buildGeminiUrl(window.location.href), '_blank')`
 - [x] T018 Run `npm test` — T015 tests MUST NOW PASS (GREEN), full suite must stay green
 - [x] T019 REFACTOR `src/entrypoints/gemini.content/index.ts` and click handler if needed
