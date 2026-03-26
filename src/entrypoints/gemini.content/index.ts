@@ -9,6 +9,10 @@ export default defineContentScript({
     waitForInput()
       .then((el) => {
         fillInput(el, prompt);
+        return waitForSendButton();
+      })
+      .then((btn) => {
+        btn.click();
       })
       .catch(() => {});
   },
@@ -19,6 +23,46 @@ const INPUT_SELECTORS = [
   "div[contenteditable]",
   "textarea",
 ];
+
+const SEND_BUTTON_SELECTORS = [
+  'button[aria-label*="Send"]',
+  'button[data-mat-icon-name="send"]',
+  "button.send-button",
+];
+
+function findEnabledSendButton(): HTMLButtonElement | null {
+  for (const sel of SEND_BUTTON_SELECTORS) {
+    const el = document.querySelector<HTMLButtonElement>(sel);
+    if (el && !el.disabled) return el;
+  }
+  return null;
+}
+
+export function waitForSendButton(timeout = 5000): Promise<HTMLButtonElement> {
+  return new Promise((resolve, reject) => {
+    const existing = findEnabledSendButton();
+    if (existing) return resolve(existing);
+
+    const mo = new MutationObserver(() => {
+      const btn = findEnabledSendButton();
+      if (btn) {
+        mo.disconnect();
+        clearTimeout(timer);
+        resolve(btn);
+      }
+    });
+    const timer = setTimeout(() => {
+      mo.disconnect();
+      reject(new Error("Gemini send button not found within timeout"));
+    }, timeout);
+    mo.observe(document.body ?? document.documentElement, {
+      childList: true,
+      subtree: true,
+      attributes: true,
+      attributeFilter: ["disabled"],
+    });
+  });
+}
 
 function waitForInput(): Promise<HTMLElement> {
   return new Promise((resolve, reject) => {
