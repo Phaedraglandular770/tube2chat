@@ -14,6 +14,7 @@
   <img src="https://img.shields.io/badge/TypeScript-strict-3178c6?logo=typescript&logoColor=white" alt="TypeScript"/>
   <img src="https://img.shields.io/badge/WXT-0.20-7c3aed?logo=vite&logoColor=white" alt="WXT"/>
   <img src="https://img.shields.io/badge/tests-26%20passing-22c55e?logo=vitest&logoColor=white" alt="Tests"/>
+  <img src="https://github.com/salimomrani/tube2chat/actions/workflows/ci.yml/badge.svg" alt="CI"/>
 </p>
 
 ---
