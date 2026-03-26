@@ -3,10 +3,10 @@ import { buildGeminiUrl } from "../../utils/prompt";
 
 const BUTTON_ID = "tube2chat-btn";
 const ANCHOR_SELECTORS = [
-  "ytd-watch-metadata #above-the-fold",
-  "#above-the-fold",
-  "#top-row.ytd-watch-metadata",
-  "#primary.ytd-watch-flexy",
+  "#above-the-fold #flexible-item-buttons",
+  "#top-row #flexible-item-buttons",
+  "#flexible-item-buttons",
+  "ytd-video-owner-renderer",
 ];
 
 let pendingObserver: MutationObserver | null = null;
@@ -55,15 +55,92 @@ function injectButton(): void {
   doInject(anchor);
 }
 
+const STYLES_ID = "tube2chat-styles";
+
+function injectStyles(): void {
+  if (document.getElementById(STYLES_ID)) return;
+  const style = document.createElement("style");
+  style.id = STYLES_ID;
+  style.textContent = `
+    #tube2chat-btn {
+      display: inline-flex !important;
+      align-items: center !important;
+      width: fit-content !important;
+      gap: 8px;
+      margin: 0 0 0 12px;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 24px;
+      background: linear-gradient(135deg, #4285f4 0%, #7c3aed 35%, #db2777 70%, #f59e0b 100%);
+      background-size: 300% 300%;
+      color: #fff !important;
+      font-family: 'Google Sans', 'Segoe UI', system-ui, sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.015em;
+      cursor: pointer;
+      box-shadow: 0 2px 10px rgba(124, 58, 237, 0.35);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+      animation: tube2chat-shimmer 5s ease infinite;
+      white-space: nowrap;
+      outline: none;
+      -webkit-font-smoothing: antialiased;
+      position: relative;
+      z-index: 1;
+    }
+    @keyframes tube2chat-shimmer {
+      0%   { background-position: 0%   50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0%   50%; }
+    }
+    #tube2chat-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(124, 58, 237, 0.55);
+      filter: brightness(1.08);
+    }
+    #tube2chat-btn:active {
+      transform: translateY(0px);
+      box-shadow: 0 2px 8px rgba(124, 58, 237, 0.3);
+      filter: brightness(0.95);
+    }
+    #tube2chat-btn:focus-visible {
+      outline: 2px solid rgba(255, 255, 255, 0.7);
+      outline-offset: 2px;
+    }
+  `;
+  (document.head ?? document.documentElement).appendChild(style);
+}
+
 function doInject(anchor: Element): void {
   if (document.getElementById(BUTTON_ID)) return; // guard against race
+  injectStyles();
+
   const btn = document.createElement("button");
   btn.id = BUTTON_ID;
-  btn.textContent = "Summarize with Gemini";
+
+  // Gemini 4-pointed star icon
+  const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+  svg.setAttribute("width", "16");
+  svg.setAttribute("height", "16");
+  svg.setAttribute("viewBox", "0 0 28 28");
+  svg.setAttribute("fill", "none");
+  svg.setAttribute("aria-hidden", "true");
+  const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+  path.setAttribute(
+    "d",
+    "M14 0C14 7.73 7.73 14 0 14C7.73 14 14 20.27 14 28C14 20.27 20.27 14 28 14C20.27 14 14 7.73 14 0Z",
+  );
+  path.setAttribute("fill", "white");
+  svg.appendChild(path);
+
+  btn.appendChild(svg);
+  btn.appendChild(document.createTextNode("Summarize with Gemini"));
+
   btn.addEventListener("click", () => {
     window.open(buildGeminiUrl(window.location.href), "_blank");
   });
-  anchor.insertAdjacentElement("afterend", btn);
+
+  anchor.insertAdjacentElement("beforebegin", btn);
 }
 
 export default defineContentScript({

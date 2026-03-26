@@ -4,6 +4,7 @@ import { defineConfig } from "wxt";
 export default defineConfig({
   srcDir: "src",
   publicDir: "src/public",
+  outDir: "dist",
   manifest: {
     name: "Tube2Chat",
     version: "0.0.1",
