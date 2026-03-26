@@ -6,14 +6,14 @@
 
 <p align="center">
   Chrome extension that adds a <strong>Summarize with Gemini</strong> button on YouTube video pages.<br/>
-  One click → Gemini opens with a structured French summary prompt pre-filled.
+  One click → Gemini opens with a structured French summary prompt pre-filled and auto-submitted.
 </p>
 
 <p align="center">
   <img src="https://img.shields.io/badge/Chrome-MV3-4285f4?logo=googlechrome&logoColor=white" alt="Chrome MV3"/>
   <img src="https://img.shields.io/badge/TypeScript-strict-3178c6?logo=typescript&logoColor=white" alt="TypeScript"/>
   <img src="https://img.shields.io/badge/WXT-0.20-7c3aed?logo=vite&logoColor=white" alt="WXT"/>
-  <img src="https://img.shields.io/badge/tests-22%20passing-22c55e?logo=vitest&logoColor=white" alt="Tests"/>
+  <img src="https://img.shields.io/badge/tests-26%20passing-22c55e?logo=vitest&logoColor=white" alt="Tests"/>
 </p>
 
 ---
@@ -22,7 +22,7 @@
 
 1. Navigate to any YouTube video (`/watch?v=...`)
 2. A **✦ Summarize with Gemini** button appears in the action bar (next to Like / Share)
-3. Click → a new tab opens on `gemini.google.com` with a structured prompt pre-filled:
+3. Click → a new tab opens on `gemini.google.com` with a structured prompt pre-filled and auto-submitted:
    - Introduction
    - Key points with timestamps
    - Conclusion
