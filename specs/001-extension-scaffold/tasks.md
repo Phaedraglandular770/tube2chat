@@ -23,11 +23,11 @@ and testing of each story.
 
 **Purpose**: Initialize the WXT + TypeScript project base.
 
-- [ ] T001 Initialize WXT project: run `npx wxt@latest init` in repo root, select TypeScript template, name `tube2chat`
-- [ ] T002 Configure `wxt.config.ts` at repo root: set `srcDir: 'src'`, manifest `name`, `version`, `description`
-- [ ] T003 [P] Configure `tsconfig.json` at repo root: extend `.wxt/tsconfig.json`, add `strict: true`, `moduleResolution: "Bundler"`
-- [ ] T004 [P] Update `.gitignore`: ensure `dist/`, `.wxt/`, `node_modules/` are listed
-- [ ] T005 [P] Add `engines` field to `package.json`: `"engines": { "node": ">=20" }` — documents required Node version per edge case in spec
+- [x] T001 Initialize WXT project: run `npx wxt@latest init` in repo root, select TypeScript template, name `tube2chat`
+- [x] T002 Configure `wxt.config.ts` at repo root: set `srcDir: 'src'`, manifest `name`, `version`, `description`
+- [x] T003 [P] Configure `tsconfig.json` at repo root: extend `.wxt/tsconfig.json`, add `strict: true`, `moduleResolution: "Bundler"`
+- [x] T004 [P] Update `.gitignore`: ensure `dist/`, `.wxt/`, `node_modules/` are listed
+- [x] T005 [P] Add `engines` field to `package.json`: `"engines": { "node": ">=20" }` — documents required Node version per edge case in spec
 
 ---
 
@@ -37,10 +37,10 @@ and testing of each story.
 
 **⚠️ CRITICAL**: No user story implementation can begin until Vitest is configured and `npm test` runs without error.
 
-- [ ] T006 Install Vitest: `npm install -D vitest`
-- [ ] T007 Create `vitest.config.ts` at repo root with `WxtVitest()` plugin from `wxt/testing/vitest-plugin`
-- [ ] T008 Add `"test": "vitest"` script to `package.json`
-- [ ] T009 Run `npm test` — must exit with no failures (empty suite is acceptable)
+- [x] T006 Install Vitest: `npm install -D vitest`
+- [x] T007 Create `vitest.config.ts` at repo root with `WxtVitest()` plugin from `wxt/testing/vitest-plugin`
+- [x] T008 Add `"test": "vitest"` script to `package.json`
+- [x] T009 Run `npm test` — must exit with no failures (empty suite is acceptable)
 
 **Checkpoint**: `npm test` runs cleanly — user story implementation can begin.
 
@@ -54,16 +54,16 @@ and testing of each story.
 
 ### Tests for User Story 1 ⚠️ Write FIRST — verify they FAIL before implementing
 
-- [ ] T010 [P] [US1] Write failing unit test in `src/tests/content-script.test.ts`: import `src/entrypoints/youtube.content/index.ts` and assert it exports a `defineContentScript` result with `matches` containing `'*://*.youtube.com/*'`
-- [ ] T011 [P] [US1] Write failing unit test in `src/tests/background.test.ts`: assert `src/entrypoints/background.ts` can be imported without error
+- [x] T010 [P] [US1] Write failing unit test in `src/tests/content-script.test.ts`: import `src/entrypoints/youtube.content/index.ts` and assert it exports a `defineContentScript` result with `matches` containing `'*://*.youtube.com/*'`
+- [x] T011 [P] [US1] Write failing unit test in `src/tests/background.test.ts`: assert `src/entrypoints/background.ts` can be imported without error
 
 ### Implementation for User Story 1
 
-- [ ] T012 [US1] Create content script stub at `src/entrypoints/youtube.content/index.ts`: export `defineContentScript({ matches: ['*://*.youtube.com/*'], runAt: 'document_idle', main() {} })` — zero imports
-- [ ] T013 [US1] Create service worker stub at `src/entrypoints/background.ts`: export `defineBackground(() => {})` — empty stub
-- [ ] T014 [US1] Run `npm test` — T010 and T011 must now pass (GREEN)
-- [ ] T015 [US1] Run `npm run build` — verify `dist/` is produced and `dist/manifest.json` declares `manifest_version: 3`
-- [ ] T016 [US1] Manual validation: load `dist/` as unpacked extension in Chrome — verify no errors in `chrome://extensions`
+- [x] T012 [US1] Create content script stub at `src/entrypoints/youtube.content/index.ts`: export `defineContentScript({ matches: ['*://*.youtube.com/*'], runAt: 'document_idle', main() {} })` — zero imports
+- [x] T013 [US1] Create service worker stub at `src/entrypoints/background.ts`: export `defineBackground(() => {})` — empty stub
+- [x] T014 [US1] Run `npm test` — T010 and T011 must now pass (GREEN)
+- [x] T015 [US1] Run `npm run build` — verify `dist/` is produced and `dist/manifest.json` declares `manifest_version: 3`
+- [x] T016 [US1] Manual validation: load `dist/` as unpacked extension in Chrome — verify no errors in `chrome://extensions`
 
 **Checkpoint**: Extension builds and loads in Chrome — US1 complete.
 
@@ -77,8 +77,8 @@ and testing of each story.
 
 ### Implementation for User Story 2
 
-- [ ] T017 [US2] Write placeholder smoke test in `src/tests/scaffold.test.ts`: `describe('scaffold', () => { it('test infrastructure is operational', () => { expect(true).toBe(true) }) })` — infrastructure smoke test, RED phase N/A
-- [ ] T018 [US2] Run `npm test` — all tests pass including scaffold.test.ts
+- [x] T017 [US2] Write placeholder smoke test in `src/tests/scaffold.test.ts`: `describe('scaffold', () => { it('test infrastructure is operational', () => { expect(true).toBe(true) }) })` — infrastructure smoke test, RED phase N/A
+- [x] T018 [US2] Run `npm test` — all tests pass including scaffold.test.ts
 
 **Checkpoint**: Test suite operational with at least one passing test — US2 complete.
 
@@ -92,8 +92,8 @@ and testing of each story.
 
 ### Implementation for User Story 3
 
-- [ ] T019 [US3] Run `npm run dev` and verify the WXT dev server starts without errors
-- [ ] T020 [US3] Manual validation: modify `src/entrypoints/youtube.content/index.ts` (add/remove a comment), verify WXT triggers a reload without manual intervention
+- [x] T019 [US3] Run `npm run dev` and verify the WXT dev server starts without errors
+- [x] T020 [US3] Manual validation: modify `src/entrypoints/youtube.content/index.ts` (add/remove a comment), verify WXT triggers a reload without manual intervention
 
 **Checkpoint**: Dev mode functional — US3 complete.
 
@@ -101,7 +101,7 @@ and testing of each story.
 
 ## Phase 6: Polish
 
-- [ ] T021 Update `README.md` with quickstart commands: `npm install`, `npm run build`, `npm test`, `npm run dev`
+- [x] T021 Update `README.md` with quickstart commands: `npm install`, `npm run build`, `npm test`, `npm run dev`
 
 ---
 

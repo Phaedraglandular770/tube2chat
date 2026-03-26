@@ -23,7 +23,7 @@ and testing of each story.
 
 **Purpose**: Confirm the scaffold baseline is clean before adding new files.
 
-- [ ] T001 Run `npm test` and `npm run build` — both must exit cleanly (baseline check, no new code written here)
+- [x] T001 Run `npm test` and `npm run build` — both must exit cleanly (baseline check, no new code written here)
 
 ---
 
@@ -35,13 +35,13 @@ and testing of each story.
 
 ### Tests for Foundational utilities ⚠️ Write FIRST — verify they FAIL before implementing
 
-- [ ] T002 Write failing unit tests for `isYouTubeWatchPage` in `src/tests/url.test.ts`:
+- [x] T002 Write failing unit tests for `isYouTubeWatchPage` in `src/tests/url.test.ts`:
   - `isYouTubeWatchPage('https://www.youtube.com/watch?v=abc123')` → `true`
   - `isYouTubeWatchPage('https://www.youtube.com/feed/subscriptions')` → `false`
   - `isYouTubeWatchPage('https://www.youtube.com/channel/UCxyz')` → `false`
   - `isYouTubeWatchPage('https://www.youtube.com/watch')` → `false` (no `v=`)
   - `isYouTubeWatchPage('')` → `false`
-- [ ] T003 [P] Write failing unit tests for `buildGeminiUrl` in `src/tests/prompt.test.ts`:
+- [x] T003 [P] Write failing unit tests for `buildGeminiUrl` in `src/tests/prompt.test.ts`:
   - Result starts with `'https://gemini.google.com/app?prompt='`
   - Decoded prompt contains the input video URL
   - Decoded prompt contains `'introduction'`
@@ -49,14 +49,14 @@ and testing of each story.
   - Decoded prompt contains `'conclusion'`
   - Decoded prompt contains `'français'`
   - Result has no raw spaces or newlines (is percent-encoded)
-- [ ] T004 Run `npm test` — T002 and T003 tests MUST FAIL (confirm RED before implementing)
+- [x] T004 Run `npm test` — T002 and T003 tests MUST FAIL (confirm RED before implementing)
 
 ### Implementation for Foundational utilities
 
-- [ ] T005 Implement `isYouTubeWatchPage(url: string): boolean` in `src/utils/url.ts` — use `URL` constructor + check `hostname.includes('youtube.com')` and `pathname === '/watch'` and `searchParams.has('v')`
-- [ ] T006 [P] Implement `buildGeminiUrl(videoUrl: string): string` in `src/utils/prompt.ts` — hardcoded French prompt template with `{VIDEO_URL}` replaced by input, then `encodeURIComponent`
-- [ ] T007 Run `npm test` — T002 and T003 tests MUST NOW PASS (GREEN)
-- [ ] T008 REFACTOR `src/utils/url.ts` and `src/utils/prompt.ts` if needed — clarity, edge cases, no behaviour change
+- [x] T005 Implement `isYouTubeWatchPage(url: string): boolean` in `src/utils/url.ts` — use `URL` constructor + check `hostname.includes('youtube.com')` and `pathname === '/watch'` and `searchParams.has('v')`
+- [x] T006 [P] Implement `buildGeminiUrl(videoUrl: string): string` in `src/utils/prompt.ts` — hardcoded French prompt template with `{VIDEO_URL}` replaced by input, then `encodeURIComponent`
+- [x] T007 Run `npm test` — T002 and T003 tests MUST NOW PASS (GREEN)
+- [x] T008 REFACTOR `src/utils/url.ts` and `src/utils/prompt.ts` if needed — clarity, edge cases, no behaviour change
 
 **Checkpoint**: Utility functions tested and GREEN — user story implementation can begin.
 
@@ -70,14 +70,14 @@ and testing of each story.
 
 ### Tests for User Story 1 ⚠️ Write FIRST — verify they FAIL before implementing
 
-- [ ] T009 Update `src/tests/content-script.test.ts`: add failing assertions that `defineContentScript` from `src/entrypoints/youtube.content/index.ts` has:
+- [x] T009 Update `src/tests/content-script.test.ts`: add failing assertions that `defineContentScript` from `src/entrypoints/youtube.content/index.ts` has:
   - `matches` containing `'*://*.youtube.com/*'`
   - `runAt` equal to `'document_start'`
 
 ### Implementation for User Story 1
 
-- [ ] T010 Add failing assertion to `src/tests/content-script.test.ts`: verify that navigating to a non-watch page removes `#tube2chat-btn` from DOM (i.e. calling the navigation handler with a non-watch URL removes the button if present) — confirm RED
-- [ ] T011 Rewrite `src/entrypoints/youtube.content/index.ts` with full implementation:
+- [x] T010 Add failing assertion to `src/tests/content-script.test.ts`: verify that navigating to a non-watch page removes `#tube2chat-btn` from DOM (i.e. calling the navigation handler with a non-watch URL removes the button if present) — confirm RED
+- [x] T011 Rewrite `src/entrypoints/youtube.content/index.ts` with full implementation:
   - `defineContentScript({ matches: ['*://*.youtube.com/*'], runAt: 'document_start', main(ctx) { ... } })`
   - `injectButton()`: guarded by `document.getElementById('tube2chat-btn')` check (idempotent)
   - `injectButton()` uses the fallback selector chain: `['ytd-watch-metadata #above-the-fold', '#above-the-fold', '#top-row.ytd-watch-metadata', '#primary.ytd-watch-flexy']`
@@ -87,9 +87,9 @@ and testing of each story.
   - On each navigation event: check `isYouTubeWatchPage(location.href)` before injecting
   - Initial run on hard load if already on a watch page
   - Click handler: stub for now — `console.log('clicked')` (US2 will complete this)
-- [ ] T012 Run `npm test` — T009 and T010 tests MUST NOW PASS (GREEN)
-- [ ] T013 REFACTOR `src/entrypoints/youtube.content/index.ts` if needed
-- [ ] T014 Manual validation: load extension → YouTube video page → button appears below player, no duplicate on repeated navigation, absent on non-video pages, disappears when navigating to /feed
+- [x] T012 Run `npm test` — T009 and T010 tests MUST NOW PASS (GREEN)
+- [x] T013 REFACTOR `src/entrypoints/youtube.content/index.ts` if needed
+- [x] T014 Manual validation: load extension → YouTube video page → button appears below player, no duplicate on repeated navigation, absent on non-video pages, disappears when navigating to /feed
 
 **Checkpoint**: Button visible on YouTube video pages — US1 complete.
 
@@ -103,20 +103,20 @@ and testing of each story.
 
 ### Tests for User Story 2 ⚠️ Write FIRST — verify they FAIL before implementing
 
-- [ ] T015 Write failing unit tests in `src/tests/gemini-content.test.ts`: assert that `defineContentScript` from `src/entrypoints/gemini.content/index.ts` has `matches` containing `'*://gemini.google.com/*'`
+- [x] T015 Write failing unit tests in `src/tests/gemini-content.test.ts`: assert that `defineContentScript` from `src/entrypoints/gemini.content/index.ts` has `matches` containing `'*://gemini.google.com/*'`
 
 ### Implementation for User Story 2
 
-- [ ] T016 Create `src/entrypoints/gemini.content/index.ts`:
+- [x] T016 Create `src/entrypoints/gemini.content/index.ts`:
   - `defineContentScript({ matches: ['*://gemini.google.com/*'], runAt: 'document_idle', main() { ... } })`
   - Read `new URLSearchParams(location.search).get('prompt')` — if absent or empty, return early (no-op)
   - Wait for Gemini's input element to appear (try `rich-textarea div[contenteditable]` as primary, `textarea` as fallback — use `MutationObserver` to wait)
   - Inject prompt text via native `InputEvent`: set `element.value = promptText` then `element.dispatchEvent(new InputEvent('input', { bubbles: true, data: promptText }))`
   - MUST NOT auto-submit (no Enter key simulation)
-- [ ] T017 Wire click handler in `src/entrypoints/youtube.content/index.ts`: replace `console.log` stub with `window.open(buildGeminiUrl(window.location.href), '_blank')`
-- [ ] T018 Run `npm test` — T015 tests MUST NOW PASS (GREEN), full suite must stay green
-- [ ] T019 REFACTOR `src/entrypoints/gemini.content/index.ts` and click handler if needed
-- [ ] T020 Manual E2E validation:
+- [x] T017 Wire click handler in `src/entrypoints/youtube.content/index.ts`: replace `console.log` stub with `window.open(buildGeminiUrl(window.location.href), '_blank')`
+- [x] T018 Run `npm test` — T015 tests MUST NOW PASS (GREEN), full suite must stay green
+- [x] T019 REFACTOR `src/entrypoints/gemini.content/index.ts` and click handler if needed
+- [x] T020 Manual E2E validation:
   - Click button on a YouTube video → new tab opens on `gemini.google.com`
   - Prompt is pre-filled with intro/timestamps/conclusion structure in French containing the video URL
   - Prompt is NOT auto-submitted
@@ -128,9 +128,9 @@ and testing of each story.
 
 ## Phase 5: Polish
 
-- [ ] T021 Run full test suite `npm run test:run` — zero failures required
-- [ ] T022 [P] Run `npm run build` — extension builds with no TypeScript errors, `manifest.json` lists both content scripts
-- [ ] T023 Validate `quickstart.md` steps end-to-end (manual walkthrough) — explicitly verify in DevTools Network tab that clicking the button fires zero external network requests
+- [x] T021 Run full test suite `npm run test:run` — zero failures required
+- [x] T022 [P] Run `npm run build` — extension builds with no TypeScript errors, `manifest.json` lists both content scripts
+- [x] T023 Validate `quickstart.md` steps end-to-end (manual walkthrough) — explicitly verify in DevTools Network tab that clicking the button fires zero external network requests
 
 ---
 
